@@ -8,6 +8,7 @@ from pyrogram.errors import ButtonDataInvalid, FloodWait
 
 from bot.database import Database # pylint: disable=import-error
 from bot.bot import Bot # pylint: disable=import-error
+from bot import MASSAGE_PHOTO
 
 
 FIND = {}
@@ -206,9 +207,10 @@ async def auto_filter(bot, update):
         reply_markup = InlineKeyboardMarkup(result[0])
 
         try:
-            await bot.send_message(
+            await bot.send_photo(
                 chat_id = update.chat.id,
-                text=f"<b>🗂️ Total Files Found :- {(len_results)}</b>\n<b>🎬 Requested Query :-</b> <code>{query}</code>",
+                photo= MASSAGE_PHOTO,
+                caption=f"<b>🗂️ Total Files Found :- {(len_results)}</b>\n<b>🎬 Requested Query :-</b> <code>{query}</code>",
                 reply_markup=reply_markup,
                 parse_mode="html",
                 reply_to_message_id=update.message_id
